@@ -80,6 +80,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:description", content: "AI-powered insurance policy intelligence, claims and customer operations." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Policyworks — Insurance Policy Intelligence" },
+      { name: "twitter:description", content: "AI-powered insurance policy intelligence, claims and customer operations." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3ce72414-884c-4176-b2ba-1be376a45028/id-preview-59e30174--f3839986-c0ec-48a2-a88b-3424a131b54b.lovable.app-1778659421104.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3ce72414-884c-4176-b2ba-1be376a45028/id-preview-59e30174--f3839986-c0ec-48a2-a88b-3424a131b54b.lovable.app-1778659421104.png" },
     ],
     links: [
       {
