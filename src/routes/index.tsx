@@ -1,26 +1,29 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { LayoutDashboard } from "lucide-react";
+import { ContentContainer } from "@/components/layout/ContentContainer";
+import { PageHeader } from "@/components/layout/PageHeader";
+import { EmptyState } from "@/components/shared/EmptyState";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
-  component: Index,
+  component: DashboardPage,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
+function DashboardPage() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
+    <ContentContainer>
+      <PageHeader
+        title="Dashboard"
+        description="Overview of policies, claims, and customer activity across your workspace."
+        actions={<Button size="sm">New report</Button>}
       />
-    </div>
+      <div className="mt-8">
+        <EmptyState
+          icon={<LayoutDashboard className="h-5 w-5" />}
+          title="Your workspace is ready"
+          description="Connect your first policy document or sync customer data to start populating your dashboard."
+        />
+      </div>
+    </ContentContainer>
   );
-}
-
-function Index() {
-  return <PlaceholderIndex />;
 }
