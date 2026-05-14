@@ -178,7 +178,7 @@ export function AIChatLayout() {
   const isEmpty = !active || active.messages.length === 0;
 
   return (
-    <div className="flex h-[calc(100vh-3.5rem)] flex-col">
+    <div className="flex h-[calc(100svh-3.5rem)] min-h-0 flex-col overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between gap-3 border-b bg-background px-4 py-2.5">
         <div className="flex min-w-0 items-center gap-2">
