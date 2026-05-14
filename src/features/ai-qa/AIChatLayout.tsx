@@ -1,10 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Sparkles, History, PanelLeftClose, PanelLeft } from "lucide-react";
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from "@/components/ui/resizable";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -178,7 +173,7 @@ export function AIChatLayout() {
   const isEmpty = !active || active.messages.length === 0;
 
   return (
-    <div className="flex h-[calc(100vh-3.5rem)] flex-col">
+    <div className="flex h-[calc(100svh-3.5rem)] min-h-0 flex-col overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between gap-3 border-b bg-background px-4 py-2.5">
         <div className="flex min-w-0 items-center gap-2">
@@ -238,54 +233,51 @@ export function AIChatLayout() {
           </aside>
         )}
 
-        <ResizablePanelGroup orientation="horizontal" className="min-w-0 flex-1">
-          {/* Left: Citations */}
-          <ResizablePanel defaultSize={32} minSize={22} maxSize={45} className="hidden md:block">
+        <div className="flex min-w-0 flex-1">
+          {/* Chat */}
+          <div className="flex min-w-0 flex-1 flex-col bg-background">
+            <div ref={scrollRef} className="min-h-0 flex-1 overflow-y-auto">
+              {isEmpty ? (
+                <EmptyChat onPick={handleSend} />
+              ) : (
+                <div className="mx-auto w-full max-w-3xl space-y-6 px-4 py-6">
+                  {active.messages.map((m) => (
+                    <ChatMessage
+                      key={m.id}
+                      message={m}
+                      onCitationClick={handleCitationClick}
+                      activeCitationId={activeCitationId}
+                      onFollowUp={handleSend}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="border-t bg-gradient-to-t from-background via-background to-background/80 px-4 pb-4 pt-3">
+              <div className="mx-auto w-full max-w-3xl space-y-2">
+                <ChatInputBar
+                  onSend={handleSend}
+                  onStop={handleStop}
+                  isStreaming={isStreaming}
+                />
+                <p className="text-center text-[11px] text-muted-foreground">
+                  Answers are AI-generated from your indexed policies. Always verify against the
+                  cited source.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Citations */}
+          <aside className="hidden w-80 shrink-0 border-l xl:block">
             <CitationPanel
               citations={allCitations}
               activeCitationId={activeCitationId}
               onSelect={handleCitationClick}
             />
-          </ResizablePanel>
-          <ResizableHandle className="hidden md:flex" />
-
-          {/* Right: Chat */}
-          <ResizablePanel defaultSize={68} minSize={45}>
-            <div className="flex h-full flex-col bg-background">
-              <div ref={scrollRef} className="flex-1 overflow-y-auto">
-                {isEmpty ? (
-                  <EmptyChat onPick={handleSend} />
-                ) : (
-                  <div className="mx-auto w-full max-w-3xl space-y-6 px-4 py-6">
-                    {active.messages.map((m) => (
-                      <ChatMessage
-                        key={m.id}
-                        message={m}
-                        onCitationClick={handleCitationClick}
-                        activeCitationId={activeCitationId}
-                        onFollowUp={handleSend}
-                      />
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <div className="border-t bg-gradient-to-t from-background via-background to-background/80 px-4 pb-4 pt-3">
-                <div className="mx-auto w-full max-w-3xl space-y-2">
-                  <ChatInputBar
-                    onSend={handleSend}
-                    onStop={handleStop}
-                    isStreaming={isStreaming}
-                  />
-                  <p className="text-center text-[11px] text-muted-foreground">
-                    Answers are AI-generated from your indexed policies. Always verify against the
-                    cited source.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </ResizablePanel>
-        </ResizablePanelGroup>
+          </aside>
+        </div>
       </div>
     </div>
   );

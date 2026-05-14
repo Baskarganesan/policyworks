@@ -9,7 +9,7 @@ export function AppShell() {
       <AppSidebar />
       <SidebarInset>
         <TopNavbar />
-        <main className="flex-1">
+        <main className="flex min-h-0 flex-1 flex-col">
           <Outlet />
         </main>
       </SidebarInset>
