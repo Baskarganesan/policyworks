@@ -238,7 +238,7 @@ export function AIChatLayout() {
           </aside>
         )}
 
-        <ResizablePanelGroup direction="horizontal" className="min-w-0 flex-1">
+        <ResizablePanelGroup orientation="horizontal" className="min-w-0 flex-1">
           {/* Left: Citations */}
           <ResizablePanel defaultSize={32} minSize={22} maxSize={45} className="hidden md:block">
             <CitationPanel
