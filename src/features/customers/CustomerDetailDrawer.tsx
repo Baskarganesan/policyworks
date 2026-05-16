@@ -13,7 +13,7 @@ import { DocumentsList } from "./DocumentsList";
 import { NotesTimeline } from "./NotesTimeline";
 import { InteractionFeed } from "./InteractionFeed";
 import { CustomerInsightsPanel } from "./CustomerInsightCard";
-import type { Customer, CustomerNote } from "./types";
+import type { Customer } from "./types";
 
 interface Props {
   customer: Customer | null;
@@ -138,5 +138,3 @@ export function CustomerDetailDrawer({ customer, open, onOpenChange, onAddNote }
   );
 }
 
-// satisfy unused import linter for CustomerNote in types when tree-shaken
-export type _NoteRef = CustomerNote;
