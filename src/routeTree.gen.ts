@@ -17,6 +17,8 @@ import { Route as ClaimsRouteImport } from './routes/claims'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AiQaRouteImport } from './routes/ai-qa'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PoliciesIndexRouteImport } from './routes/policies.index'
+import { Route as PoliciesPolicyIdRouteImport } from './routes/policies.$policyId'
 
 const TasksRoute = TasksRouteImport.update({
   id: '/tasks',
@@ -58,6 +60,16 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PoliciesIndexRoute = PoliciesIndexRouteImport.update({
+  id: '/policies/',
+  path: '/policies/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesPolicyIdRoute = PoliciesPolicyIdRouteImport.update({
+  id: '/policies/$policyId',
+  path: '/policies/$policyId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -68,6 +80,8 @@ export interface FileRoutesByFullPath {
   '/documents': typeof DocumentsRoute
   '/settings': typeof SettingsRoute
   '/tasks': typeof TasksRoute
+  '/policies/$policyId': typeof PoliciesPolicyIdRoute
+  '/policies/': typeof PoliciesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -78,6 +92,8 @@ export interface FileRoutesByTo {
   '/documents': typeof DocumentsRoute
   '/settings': typeof SettingsRoute
   '/tasks': typeof TasksRoute
+  '/policies/$policyId': typeof PoliciesPolicyIdRoute
+  '/policies': typeof PoliciesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -89,6 +105,8 @@ export interface FileRoutesById {
   '/documents': typeof DocumentsRoute
   '/settings': typeof SettingsRoute
   '/tasks': typeof TasksRoute
+  '/policies/$policyId': typeof PoliciesPolicyIdRoute
+  '/policies/': typeof PoliciesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -101,6 +119,8 @@ export interface FileRouteTypes {
     | '/documents'
     | '/settings'
     | '/tasks'
+    | '/policies/$policyId'
+    | '/policies/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -111,6 +131,8 @@ export interface FileRouteTypes {
     | '/documents'
     | '/settings'
     | '/tasks'
+    | '/policies/$policyId'
+    | '/policies'
   id:
     | '__root__'
     | '/'
@@ -121,6 +143,8 @@ export interface FileRouteTypes {
     | '/documents'
     | '/settings'
     | '/tasks'
+    | '/policies/$policyId'
+    | '/policies/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -132,6 +156,8 @@ export interface RootRouteChildren {
   DocumentsRoute: typeof DocumentsRoute
   SettingsRoute: typeof SettingsRoute
   TasksRoute: typeof TasksRoute
+  PoliciesPolicyIdRoute: typeof PoliciesPolicyIdRoute
+  PoliciesIndexRoute: typeof PoliciesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -192,6 +218,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/policies/': {
+      id: '/policies/'
+      path: '/policies'
+      fullPath: '/policies/'
+      preLoaderRoute: typeof PoliciesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies/$policyId': {
+      id: '/policies/$policyId'
+      path: '/policies/$policyId'
+      fullPath: '/policies/$policyId'
+      preLoaderRoute: typeof PoliciesPolicyIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -204,6 +244,8 @@ const rootRouteChildren: RootRouteChildren = {
   DocumentsRoute: DocumentsRoute,
   SettingsRoute: SettingsRoute,
   TasksRoute: TasksRoute,
+  PoliciesPolicyIdRoute: PoliciesPolicyIdRoute,
+  PoliciesIndexRoute: PoliciesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
