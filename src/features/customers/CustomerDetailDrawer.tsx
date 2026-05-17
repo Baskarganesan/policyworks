@@ -13,6 +13,8 @@ import { DocumentsList } from "./DocumentsList";
 import { NotesTimeline } from "./NotesTimeline";
 import { InteractionFeed } from "./InteractionFeed";
 import { CustomerInsightsPanel } from "./CustomerInsightCard";
+import { OperationalInsightsPanel } from "@/features/insights/OperationalInsightsPanel";
+import { getInsightsForCustomer } from "@/features/insights/mockData";
 import type { Customer } from "./types";
 
 interface Props {
@@ -74,6 +76,7 @@ export function CustomerDetailDrawer({ customer, open, onOpenChange, onAddNote }
               <ScrollArea className="flex-1">
                 <div className="px-6 py-5">
                   <TabsContent value="overview" className="mt-0 space-y-6">
+                    <OperationalInsightsPanel insights={getInsightsForCustomer(customer.id)} compact />
                     <CustomerInsightsPanel insights={customer.insights} />
 
                     <div>
