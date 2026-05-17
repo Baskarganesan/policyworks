@@ -11,7 +11,9 @@ import { PolicyActivityFeed } from "@/features/policies/PolicyActivityFeed";
 import { EndorsementsList } from "@/features/policies/EndorsementsList";
 import { SectionNav } from "@/features/policies/SectionNav";
 import { PolicySection } from "@/features/policies/PolicySection";
+import { OperationalInsightsPanel } from "@/features/insights/OperationalInsightsPanel";
 import { getPolicyById } from "@/features/policies/mockData";
+import { getInsightsForPolicy } from "@/features/insights/mockData";
 import type { CoverageItem, Policy, PolicyInsight, RiskFlag } from "@/features/policies/types";
 
 export const Route = createFileRoute("/policies/$policyId")({
@@ -51,6 +53,7 @@ function PolicyDetailPage() {
 
   const navItems = [
     { id: "summary", label: "Summary" },
+    { id: "operational", label: "Operational signals" },
     { id: "coverage", label: "Coverage", count: policy.coverage.length },
     { id: "claims", label: "Claims", count: policy.claims.length },
     { id: "documents", label: "Documents", count: policy.documents.length },
@@ -79,6 +82,18 @@ function PolicyDetailPage() {
           </aside>
 
           <div id="summary" className="min-w-0 space-y-8 scroll-mt-32">
+            <PolicySection
+              id="operational"
+              title="Operational signals"
+              description="Real-time risks, blockers, and suggested next actions on this policy."
+            >
+              <OperationalInsightsPanel
+                insights={getInsightsForPolicy(policy.id)}
+                title="Operational insights"
+                description="Cross-entity intelligence drawn from claims, coverage, and renewal signals."
+              />
+            </PolicySection>
+
             <PolicySection
               id="coverage"
               title="Coverage overview"
