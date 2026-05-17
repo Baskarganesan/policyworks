@@ -5,6 +5,7 @@ import {
   FileText,
   ClipboardList,
   Users,
+  ListChecks,
   BarChart3,
   Settings,
   Shield,
@@ -29,6 +30,7 @@ const mainNav = [
   { title: "Policy Documents", url: "/documents", icon: FileText },
   { title: "Claims", url: "/claims", icon: ClipboardList },
   { title: "Customers", url: "/customers", icon: Users },
+  { title: "Tasks & Workflows", url: "/tasks", icon: ListChecks },
 ];
 
 const secondaryNav = [
