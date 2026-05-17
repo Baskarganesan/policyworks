@@ -5,6 +5,7 @@ import {
   FileText,
   ClipboardList,
   Users,
+  ListChecks,
   BarChart3,
   Settings,
   Shield,
