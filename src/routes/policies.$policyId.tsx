@@ -12,7 +12,7 @@ import { EndorsementsList } from "@/features/policies/EndorsementsList";
 import { SectionNav } from "@/features/policies/SectionNav";
 import { PolicySection } from "@/features/policies/PolicySection";
 import { getPolicyById } from "@/features/policies/mockData";
-import type { CoverageItem, PolicyInsight, RiskFlag } from "@/features/policies/types";
+import type { CoverageItem, Policy, PolicyInsight, RiskFlag } from "@/features/policies/types";
 
 export const Route = createFileRoute("/policies/$policyId")({
   head: ({ params }) => ({
@@ -21,7 +21,7 @@ export const Route = createFileRoute("/policies/$policyId")({
       { name: "description", content: "Operational workspace for an insurance policy: coverage, claims, renewals, and risk." },
     ],
   }),
-  loader: ({ params }) => {
+  loader: ({ params }): { policy: Policy } => {
     const policy = getPolicyById(params.policyId);
     if (!policy) throw notFound();
     return { policy };
