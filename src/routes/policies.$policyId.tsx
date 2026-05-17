@@ -21,7 +21,7 @@ export const Route = createFileRoute("/policies/$policyId")({
       { name: "description", content: "Operational workspace for an insurance policy: coverage, claims, renewals, and risk." },
     ],
   }),
-  loader: ({ params }) => {
+  loader: ({ params }): { policy: Policy } => {
     const policy = getPolicyById(params.policyId);
     if (!policy) throw notFound();
     return { policy };
