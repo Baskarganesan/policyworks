@@ -1,0 +1,240 @@
+import type { Policy } from "./types";
+
+const daysFromNow = (d: number) => {
+  const date = new Date();
+  date.setDate(date.getDate() + d);
+  return date.toISOString();
+};
+
+export const MOCK_POLICIES: Policy[] = [
+  {
+    id: "POL-1042",
+    policyNumber: "HO-2024-001042",
+    type: "home",
+    carrier: "Northbridge Mutual",
+    product: "Homeowners HO-3 Special Form",
+    effectiveDate: daysFromNow(-310),
+    renewalDate: daysFromNow(55),
+    status: "active",
+    coverageAmount: 720000,
+    annualPremium: 2840,
+    deductible: 2500,
+    assignedAgent: "Priya Shah",
+    customer: { id: "CUS-204", name: "Daniel Okafor", email: "daniel.okafor@example.com" },
+    insuredAsset: "412 Larkspur Ln, Tampa, FL 33602",
+    coverage: [
+      {
+        id: "cov-1",
+        category: "Dwelling",
+        description: "Replacement cost of primary structure",
+        limit: 540000,
+        deductible: 2500,
+        exclusions: ["Earth movement", "Intentional damage"],
+        highlight: "important",
+      },
+      {
+        id: "cov-2",
+        category: "Personal Property",
+        description: "Contents and personal belongings",
+        limit: 270000,
+        deductible: 2500,
+        exclusions: ["Currency >$200", "Unscheduled jewelry >$1,500"],
+      },
+      {
+        id: "cov-3",
+        category: "Liability",
+        description: "Personal liability protection",
+        limit: 500000,
+        deductible: 0,
+        exclusions: ["Business activities", "Auto-related incidents"],
+      },
+      {
+        id: "cov-4",
+        category: "Loss of Use",
+        description: "Additional living expenses while displaced",
+        limit: 108000,
+        deductible: 0,
+        exclusions: ["Lease cancellation fees"],
+      },
+      {
+        id: "cov-5",
+        category: "Flood",
+        description: "Standalone flood coverage",
+        limit: 0,
+        deductible: 0,
+        exclusions: ["All flood-related loss"],
+        highlight: "gap",
+      },
+    ],
+    endorsements: [
+      {
+        id: "end-1",
+        name: "Scheduled Personal Property Rider",
+        addedAt: daysFromNow(-260),
+        premiumDelta: 180,
+        status: "active",
+        summary: "Itemized coverage for jewelry and fine art up to $40,000.",
+      },
+      {
+        id: "end-2",
+        name: "Water Backup & Sump Overflow",
+        addedAt: daysFromNow(-180),
+        premiumDelta: 95,
+        status: "active",
+        summary: "Adds $10,000 of water backup coverage.",
+      },
+      {
+        id: "end-3",
+        name: "Service Line Coverage",
+        addedAt: daysFromNow(-12),
+        premiumDelta: 45,
+        status: "pending",
+        summary: "Buried utility line repair, awaiting carrier confirmation.",
+      },
+    ],
+    documents: [
+      { id: "d-1", name: "Master Policy HO-2024-001042.pdf", kind: "policy", sizeKb: 1840, uploadedAt: daysFromNow(-310), aiIndexed: "indexed" },
+      { id: "d-2", name: "Personal Property Rider.pdf", kind: "rider", sizeKb: 420, uploadedAt: daysFromNow(-260), aiIndexed: "indexed" },
+      { id: "d-3", name: "Water Backup Endorsement.pdf", kind: "endorsement", sizeKb: 220, uploadedAt: daysFromNow(-180), aiIndexed: "indexed" },
+      { id: "d-4", name: "2025 Renewal Quote.pdf", kind: "renewal", sizeKb: 360, uploadedAt: daysFromNow(-6), aiIndexed: "processing" },
+      { id: "d-5", name: "Certificate of Insurance.pdf", kind: "certificate", sizeKb: 110, uploadedAt: daysFromNow(-40), aiIndexed: "indexed" },
+    ],
+    claims: [
+      { id: "c-1", claimNumber: "CLM-2024-0421", type: "Wind & Hail", filedAt: daysFromNow(-220), amount: 8200, status: "approved" },
+      { id: "c-2", claimNumber: "CLM-2024-0788", type: "Water Damage", filedAt: daysFromNow(-95), amount: 14600, status: "under_review", investigation: true },
+      { id: "c-3", claimNumber: "CLM-2025-0044", type: "Theft", filedAt: daysFromNow(-18), amount: 3400, status: "open" },
+    ],
+    riskFlags: [
+      {
+        id: "rf-1",
+        severity: "high",
+        category: "coverage_gap",
+        message: "Flood endorsement missing for high-risk ZIP",
+        detail: "Property sits within FEMA Zone AE. Standalone NFIP or private flood coverage is strongly recommended.",
+        confidence: 92,
+      },
+      {
+        id: "rf-2",
+        severity: "medium",
+        category: "claims_frequency",
+        message: "3 claims filed within the last 12 months",
+        detail: "Frequency above carrier threshold (2). May affect renewal pricing or eligibility.",
+        confidence: 88,
+      },
+      {
+        id: "rf-3",
+        severity: "medium",
+        category: "underinsured",
+        message: "Dwelling limit below regional replacement cost",
+        detail: "Estimated replacement cost is ~$612K. Current dwelling limit $540K leaves a ~12% gap.",
+        confidence: 76,
+      },
+      {
+        id: "rf-4",
+        severity: "low",
+        category: "expiring",
+        message: "Renewal window opens in 55 days",
+        detail: "Underwriting review should begin by day 45 to avoid lapse risk.",
+        confidence: 100,
+      },
+    ],
+    insights: [
+      {
+        id: "i-1",
+        kind: "warning",
+        title: "Flood endorsement missing for high-risk ZIP code",
+        detail: "Coverage gap identified during AI policy review. Recommend offering NFIP or private flood quote before renewal.",
+        confidence: 92,
+        source: "AI Policy Review · v3",
+      },
+      {
+        id: "i-2",
+        kind: "observation",
+        title: "Coverage limits appear below regional averages",
+        detail: "Dwelling limit is 12% lower than comparable properties in 33602. Replacement cost modeling suggests $612K target.",
+        confidence: 76,
+        source: "Coverage Benchmark",
+      },
+      {
+        id: "i-3",
+        kind: "trend",
+        title: "Multiple claims filed within 12 months",
+        detail: "Three claims (wind, water, theft) since June. Pattern correlates with severe-weather season; consider loss-mitigation outreach.",
+        confidence: 84,
+        source: "Claims Pattern Detection",
+      },
+      {
+        id: "i-4",
+        kind: "recommendation",
+        title: "Bundle umbrella policy for cross-sell opportunity",
+        detail: "Customer has auto policy with same carrier. Bundling can reduce combined premium ~9%.",
+        confidence: 67,
+        source: "Cross-sell Signals",
+      },
+    ],
+    renewalTimeline: [
+      { id: "m-1", date: daysFromNow(-14), title: "Renewal quote generated", status: "complete", owner: "System", detail: "Carrier issued renewal pricing." },
+      { id: "m-2", date: daysFromNow(-6), title: "Coverage review completed", status: "complete", owner: "Priya Shah", detail: "Internal review against benchmarks." },
+      { id: "m-3", date: daysFromNow(4), title: "Customer outreach", status: "in_progress", owner: "Priya Shah", detail: "Discuss flood endorsement and dwelling limit." },
+      { id: "m-4", date: daysFromNow(18), title: "Endorsement documentation", status: "blocked", owner: "Operations", blocker: "Missing flood quote from carrier" },
+      { id: "m-5", date: daysFromNow(40), title: "Underwriting approval", status: "pending", owner: "Underwriting" },
+      { id: "m-6", date: daysFromNow(55), title: "Renewal effective", status: "pending", owner: "Carrier" },
+    ],
+    activity: [
+      { id: "a-1", timestamp: daysFromNow(-1), actor: "AI Policy Review", type: "ai_review", message: "Identified flood coverage gap; flagged for agent review." },
+      { id: "a-2", timestamp: daysFromNow(-2), actor: "Priya Shah", type: "note", message: "Called customer re: renewal timing — voicemail left." },
+      { id: "a-3", timestamp: daysFromNow(-6), actor: "System", type: "document", message: "2025 Renewal Quote uploaded." },
+      { id: "a-4", timestamp: daysFromNow(-12), actor: "Priya Shah", type: "endorsement", message: "Requested Service Line Coverage endorsement." },
+      { id: "a-5", timestamp: daysFromNow(-18), actor: "Customer Portal", type: "claim", message: "New theft claim CLM-2025-0044 attached." },
+      { id: "a-6", timestamp: daysFromNow(-40), actor: "System", type: "update", message: "Certificate of Insurance regenerated." },
+    ],
+  },
+  {
+    id: "POL-1187",
+    policyNumber: "AU-2024-001187",
+    type: "auto",
+    carrier: "Cascade General",
+    product: "Personal Auto — Full Coverage",
+    effectiveDate: daysFromNow(-150),
+    renewalDate: daysFromNow(215),
+    status: "active",
+    coverageAmount: 100000,
+    annualPremium: 1640,
+    deductible: 1000,
+    assignedAgent: "Marcus Lin",
+    customer: { id: "CUS-204", name: "Daniel Okafor", email: "daniel.okafor@example.com" },
+    insuredAsset: "2022 Toyota RAV4 · VIN ••••7821",
+    coverage: [
+      { id: "cov-a1", category: "Bodily Injury Liability", description: "Per person / per accident", limit: 100000, deductible: 0, exclusions: ["Racing", "Commercial use"] },
+      { id: "cov-a2", category: "Property Damage", description: "Damage to others' property", limit: 50000, deductible: 0, exclusions: [] },
+      { id: "cov-a3", category: "Collision", description: "Damage to insured vehicle", limit: 32000, deductible: 1000, exclusions: ["Wear & tear"] },
+      { id: "cov-a4", category: "Comprehensive", description: "Theft, weather, vandalism", limit: 32000, deductible: 500, exclusions: [] },
+    ],
+    endorsements: [
+      { id: "end-a1", name: "Rideshare Coverage", addedAt: daysFromNow(-100), premiumDelta: 120, status: "active", summary: "Extends coverage during rideshare app activity." },
+    ],
+    documents: [
+      { id: "d-a1", name: "Auto Policy AU-2024-001187.pdf", kind: "policy", sizeKb: 1240, uploadedAt: daysFromNow(-150), aiIndexed: "indexed" },
+      { id: "d-a2", name: "Rideshare Endorsement.pdf", kind: "endorsement", sizeKb: 180, uploadedAt: daysFromNow(-100), aiIndexed: "indexed" },
+    ],
+    claims: [],
+    riskFlags: [
+      { id: "rf-a1", severity: "low", category: "exposure", message: "Liability limits at state minimum range", detail: "Consider increasing BI/PD limits given asset profile.", confidence: 70 },
+    ],
+    insights: [
+      { id: "i-a1", kind: "recommendation", title: "Increase liability to 250/500/100", detail: "Recommended for households with assets >$500K.", confidence: 78, source: "Coverage Advisor" },
+    ],
+    renewalTimeline: [
+      { id: "m-a1", date: daysFromNow(170), title: "Renewal cycle begins", status: "pending", owner: "System" },
+      { id: "m-a2", date: daysFromNow(215), title: "Renewal effective", status: "pending", owner: "Carrier" },
+    ],
+    activity: [
+      { id: "a-a1", timestamp: daysFromNow(-100), actor: "Marcus Lin", type: "endorsement", message: "Added Rideshare Coverage endorsement." },
+      { id: "a-a2", timestamp: daysFromNow(-150), actor: "System", type: "update", message: "Policy bound and activated." },
+    ],
+  },
+];
+
+export function getPolicyById(id: string): Policy | undefined {
+  return MOCK_POLICIES.find((p) => p.id === id || p.policyNumber === id);
+}

@@ -27,6 +27,7 @@ import {
 const mainNav = [
   { title: "Dashboard", url: "/", icon: LayoutDashboard },
   { title: "AI Policy Q&A", url: "/ai-qa", icon: Sparkles },
+  { title: "Policies", url: "/policies", icon: Shield },
   { title: "Policy Documents", url: "/documents", icon: FileText },
   { title: "Claims", url: "/claims", icon: ClipboardList },
   { title: "Customers", url: "/customers", icon: Users },
