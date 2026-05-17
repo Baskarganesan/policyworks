@@ -12,6 +12,7 @@ import { EndorsementsList } from "@/features/policies/EndorsementsList";
 import { SectionNav } from "@/features/policies/SectionNav";
 import { PolicySection } from "@/features/policies/PolicySection";
 import { getPolicyById } from "@/features/policies/mockData";
+import type { CoverageItem, PolicyInsight, RiskFlag } from "@/features/policies/types";
 
 export const Route = createFileRoute("/policies/$policyId")({
   head: ({ params }) => ({
