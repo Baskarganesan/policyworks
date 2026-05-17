@@ -107,7 +107,7 @@ export function InsightCard({
                 Related
               </span>
               {insight.links.map((l) => (
-                <CrossEntityLink key={`${l.type}-${l.id}`} ref={l} />
+                <CrossEntityLink key={`${l.type}-${l.id}`} entity={l} />
               ))}
             </div>
           )}
