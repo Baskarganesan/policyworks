@@ -25,6 +25,8 @@ import {
   ClipboardList,
   Briefcase,
 } from "lucide-react";
+import { OperationalInsightsPanel } from "@/features/insights/OperationalInsightsPanel";
+import { getInsightsForTask } from "@/features/insights/mockData";
 import { TaskPriorityBadge } from "./TaskPriorityBadge";
 import { TaskStatusBadge } from "./TaskStatusBadge";
 import { ActivityFeed } from "./ActivityFeed";
@@ -134,6 +136,8 @@ export function TaskDetailDrawer({
 
             <ScrollArea className="flex-1">
               <div className="space-y-4 px-6 py-5">
+                <OperationalInsightsPanel insights={getInsightsForTask(task.id)} compact />
+
                 {/* Description */}
                 <SectionCard title="Description">
                   <p className="text-sm leading-relaxed text-foreground/90">
