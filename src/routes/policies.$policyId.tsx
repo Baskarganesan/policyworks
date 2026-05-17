@@ -85,7 +85,7 @@ function PolicyDetailPage() {
               description="Limits, deductibles, and exclusions across coverage categories."
             >
               <div className="space-y-2">
-                {policy.coverage.map((c) => (
+                {policy.coverage.map((c: CoverageItem) => (
                   <CoverageCard key={c.id} item={c} />
                 ))}
               </div>
@@ -129,7 +129,7 @@ function PolicyDetailPage() {
               description="Analytical signals from policy review and benchmarks."
             >
               <div className="grid gap-2 md:grid-cols-2">
-                {policy.insights.map((i) => (
+                {policy.insights.map((i: PolicyInsight) => (
                   <PolicyInsightCard key={i.id} insight={i} />
                 ))}
               </div>
@@ -141,7 +141,7 @@ function PolicyDetailPage() {
               description="Operational and underwriting risks requiring attention."
             >
               <div className="grid gap-2 md:grid-cols-2">
-                {policy.riskFlags.map((r) => (
+                {policy.riskFlags.map((r: RiskFlag) => (
                   <RiskFlagCard key={r.id} flag={r} />
                 ))}
               </div>
