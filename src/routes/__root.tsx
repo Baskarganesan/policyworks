@@ -10,6 +10,7 @@ import {
 
 import appCss from "../styles.css?url";
 import { AppShell } from "@/components/layout/AppShell";
+import { ExplainabilityProvider } from "@/features/explainability/context";
 
 function NotFoundComponent() {
   return (
@@ -117,7 +118,9 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AppShell />
+      <ExplainabilityProvider>
+        <AppShell />
+      </ExplainabilityProvider>
     </QueryClientProvider>
   );
 }
