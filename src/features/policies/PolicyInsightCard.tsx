@@ -1,5 +1,6 @@
 import { Lightbulb, TrendingUp, AlertTriangle, Eye, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ExplainButton } from "@/features/explainability/ExplainButton";
 import type { PolicyInsight } from "./types";
 
 const KIND = {
