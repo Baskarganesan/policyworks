@@ -1,5 +1,6 @@
 import { Lightbulb, TrendingUp, AlertTriangle, Eye, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ExplainButton } from "@/features/explainability/ExplainButton";
 import type { PolicyInsight } from "./types";
 
 const KIND = {
@@ -28,7 +29,18 @@ export function PolicyInsightCard({ insight }: { insight: PolicyInsight }) {
             <span className="inline-flex items-center gap-1">
               <Sparkles className="h-3 w-3" /> {insight.source}
             </span>
-            <span>{insight.confidence}% confidence</span>
+            <div className="flex items-center gap-2">
+              <span>{insight.confidence}% confidence</span>
+              <ExplainButton
+                subject={{
+                  subjectId: insight.id,
+                  title: insight.title,
+                  kind: "policy_insight",
+                  category: insight.source,
+                  confidence: insight.confidence,
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>

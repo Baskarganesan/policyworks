@@ -1,6 +1,7 @@
 import { AlertOctagon, AlertTriangle, Info, Bell, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { ExplainButton } from "@/features/explainability/ExplainButton";
 import type { AlertPriority, OperationalAlert } from "./types";
 
 const META: Record<AlertPriority, { icon: typeof Info; tone: string; label: string; bar: string }> = {
@@ -80,6 +81,17 @@ export function AlertsPanel({ alerts }: { alerts: OperationalAlert[] }) {
               {a.detail && (
                 <p className="mt-0.5 text-xs text-muted-foreground">{a.detail}</p>
               )}
+              <div className="mt-1">
+                <ExplainButton
+                  subject={{
+                    subjectId: a.id,
+                    title: a.message,
+                    kind: "alert",
+                    category: a.type,
+                    severity: a.priority === "info" ? "low" : a.priority,
+                  }}
+                />
+              </div>
             </div>
             {a.actionLabel && (
               <Button

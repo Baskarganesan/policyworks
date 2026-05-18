@@ -12,6 +12,8 @@ import { EndorsementsList } from "@/features/policies/EndorsementsList";
 import { SectionNav } from "@/features/policies/SectionNav";
 import { PolicySection } from "@/features/policies/PolicySection";
 import { OperationalInsightsPanel } from "@/features/insights/OperationalInsightsPanel";
+import { AuditTimeline } from "@/features/explainability/AuditTimeline";
+import { getAuditEventsFor } from "@/features/explainability/mockData";
 import { getPolicyById } from "@/features/policies/mockData";
 import { getInsightsForPolicy } from "@/features/insights/mockData";
 import type { CoverageItem, Policy, PolicyInsight, RiskFlag } from "@/features/policies/types";
@@ -62,6 +64,7 @@ function PolicyDetailPage() {
     { id: "insights", label: "AI insights", count: policy.insights.length },
     { id: "risks", label: "Risk flags", count: policy.riskFlags.length },
     { id: "activity", label: "Activity" },
+    { id: "audit", label: "Audit" },
   ];
 
   return (
@@ -168,6 +171,14 @@ function PolicyDetailPage() {
               description="Recent operational events on this policy."
             >
               <PolicyActivityFeed events={policy.activity} />
+            </PolicySection>
+
+            <PolicySection
+              id="audit"
+              title="Audit trail"
+              description="Traceable events with actor, source, and timestamp."
+            >
+              <AuditTimeline events={getAuditEventsFor("policy", policy.id)} />
             </PolicySection>
           </div>
         </div>
