@@ -81,6 +81,17 @@ export function AlertsPanel({ alerts }: { alerts: OperationalAlert[] }) {
               {a.detail && (
                 <p className="mt-0.5 text-xs text-muted-foreground">{a.detail}</p>
               )}
+              <div className="mt-1">
+                <ExplainButton
+                  subject={{
+                    subjectId: a.id,
+                    title: a.message,
+                    kind: "alert",
+                    category: a.type,
+                    severity: a.priority === "info" ? "low" : a.priority,
+                  }}
+                />
+              </div>
             </div>
             {a.actionLabel && (
               <Button

@@ -1,5 +1,6 @@
 import { AlertTriangle, AlertOctagon, Info, ShieldAlert } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ExplainButton } from "@/features/explainability/ExplainButton";
 import type { RiskFlag } from "./types";
 
 const SEVERITY = {
