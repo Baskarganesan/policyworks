@@ -14,6 +14,7 @@ import { SeverityChip, CategoryChip } from "./RiskIndicator";
 import { ConfidenceBadge } from "./ConfidenceBadge";
 import { CrossEntityLink } from "./CrossEntityLink";
 import { SuggestedActionButton } from "./SuggestedActionButton";
+import { ExplainButton } from "@/features/explainability/ExplainButton";
 import type { InsightCategory, InsightSeverity, OperationalInsight, SuggestedAction } from "./types";
 
 const CATEGORY_ICON: Record<InsightCategory, LucideIcon> = {
@@ -121,6 +122,17 @@ export function InsightCard({
                   onTrigger={(act) => onAction?.(act, insight)}
                 />
               ))}
+              <ExplainButton
+                className="ml-auto"
+                subject={{
+                  subjectId: insight.id,
+                  title: insight.title,
+                  kind: "insight",
+                  category: insight.source,
+                  severity: insight.severity,
+                  confidence: insight.confidence,
+                }}
+              />
             </div>
           )}
         </div>

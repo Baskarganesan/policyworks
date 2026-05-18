@@ -1,6 +1,7 @@
 import { AlertOctagon, AlertTriangle, Info, Bell, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { ExplainButton } from "@/features/explainability/ExplainButton";
 import type { AlertPriority, OperationalAlert } from "./types";
 
 const META: Record<AlertPriority, { icon: typeof Info; tone: string; label: string; bar: string }> = {
