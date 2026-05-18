@@ -33,6 +33,17 @@ export function RiskFlagCard({ flag }: { flag: RiskFlag }) {
               />
             </div>
             <span className="text-[10px] text-muted-foreground">{flag.confidence}% confidence</span>
+            <ExplainButton
+              className="ml-auto"
+              subject={{
+                subjectId: flag.id,
+                title: flag.message,
+                kind: "risk_flag",
+                category: "Risk flag",
+                severity: flag.severity,
+                confidence: flag.confidence,
+              }}
+            />
           </div>
         </div>
       </div>
