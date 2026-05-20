@@ -56,7 +56,7 @@ function CaseDetailPage() {
 
   const navItems = [
     { id: "insights", label: "Risks & insights", count: record.insights.length },
-    { id: "tasks", label: "Tasks & blockers", count: record.tasks.filter((t) => t.status !== "done").length },
+    { id: "tasks", label: "Tasks & blockers", count: record.tasks.filter((t: CaseRecord["tasks"][number]) => t.status !== "done").length },
     { id: "timeline", label: "Timeline", count: record.timeline.length },
     { id: "evidence", label: "Evidence", count: record.documents.length },
     { id: "communication", label: "Communication", count: record.messages.length },
