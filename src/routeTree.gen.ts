@@ -18,7 +18,9 @@ import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AiQaRouteImport } from './routes/ai-qa'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PoliciesIndexRouteImport } from './routes/policies.index'
+import { Route as CasesIndexRouteImport } from './routes/cases.index'
 import { Route as PoliciesPolicyIdRouteImport } from './routes/policies.$policyId'
+import { Route as CasesCaseIdRouteImport } from './routes/cases.$caseId'
 
 const TasksRoute = TasksRouteImport.update({
   id: '/tasks',
@@ -65,9 +67,19 @@ const PoliciesIndexRoute = PoliciesIndexRouteImport.update({
   path: '/policies/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CasesIndexRoute = CasesIndexRouteImport.update({
+  id: '/cases/',
+  path: '/cases/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PoliciesPolicyIdRoute = PoliciesPolicyIdRouteImport.update({
   id: '/policies/$policyId',
   path: '/policies/$policyId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CasesCaseIdRoute = CasesCaseIdRouteImport.update({
+  id: '/cases/$caseId',
+  path: '/cases/$caseId',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -80,7 +92,9 @@ export interface FileRoutesByFullPath {
   '/documents': typeof DocumentsRoute
   '/settings': typeof SettingsRoute
   '/tasks': typeof TasksRoute
+  '/cases/$caseId': typeof CasesCaseIdRoute
   '/policies/$policyId': typeof PoliciesPolicyIdRoute
+  '/cases/': typeof CasesIndexRoute
   '/policies/': typeof PoliciesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -92,7 +106,9 @@ export interface FileRoutesByTo {
   '/documents': typeof DocumentsRoute
   '/settings': typeof SettingsRoute
   '/tasks': typeof TasksRoute
+  '/cases/$caseId': typeof CasesCaseIdRoute
   '/policies/$policyId': typeof PoliciesPolicyIdRoute
+  '/cases': typeof CasesIndexRoute
   '/policies': typeof PoliciesIndexRoute
 }
 export interface FileRoutesById {
@@ -105,7 +121,9 @@ export interface FileRoutesById {
   '/documents': typeof DocumentsRoute
   '/settings': typeof SettingsRoute
   '/tasks': typeof TasksRoute
+  '/cases/$caseId': typeof CasesCaseIdRoute
   '/policies/$policyId': typeof PoliciesPolicyIdRoute
+  '/cases/': typeof CasesIndexRoute
   '/policies/': typeof PoliciesIndexRoute
 }
 export interface FileRouteTypes {
@@ -119,7 +137,9 @@ export interface FileRouteTypes {
     | '/documents'
     | '/settings'
     | '/tasks'
+    | '/cases/$caseId'
     | '/policies/$policyId'
+    | '/cases/'
     | '/policies/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -131,7 +151,9 @@ export interface FileRouteTypes {
     | '/documents'
     | '/settings'
     | '/tasks'
+    | '/cases/$caseId'
     | '/policies/$policyId'
+    | '/cases'
     | '/policies'
   id:
     | '__root__'
@@ -143,7 +165,9 @@ export interface FileRouteTypes {
     | '/documents'
     | '/settings'
     | '/tasks'
+    | '/cases/$caseId'
     | '/policies/$policyId'
+    | '/cases/'
     | '/policies/'
   fileRoutesById: FileRoutesById
 }
@@ -156,7 +180,9 @@ export interface RootRouteChildren {
   DocumentsRoute: typeof DocumentsRoute
   SettingsRoute: typeof SettingsRoute
   TasksRoute: typeof TasksRoute
+  CasesCaseIdRoute: typeof CasesCaseIdRoute
   PoliciesPolicyIdRoute: typeof PoliciesPolicyIdRoute
+  CasesIndexRoute: typeof CasesIndexRoute
   PoliciesIndexRoute: typeof PoliciesIndexRoute
 }
 
@@ -225,11 +251,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PoliciesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cases/': {
+      id: '/cases/'
+      path: '/cases'
+      fullPath: '/cases/'
+      preLoaderRoute: typeof CasesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/policies/$policyId': {
       id: '/policies/$policyId'
       path: '/policies/$policyId'
       fullPath: '/policies/$policyId'
       preLoaderRoute: typeof PoliciesPolicyIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cases/$caseId': {
+      id: '/cases/$caseId'
+      path: '/cases/$caseId'
+      fullPath: '/cases/$caseId'
+      preLoaderRoute: typeof CasesCaseIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -244,7 +284,9 @@ const rootRouteChildren: RootRouteChildren = {
   DocumentsRoute: DocumentsRoute,
   SettingsRoute: SettingsRoute,
   TasksRoute: TasksRoute,
+  CasesCaseIdRoute: CasesCaseIdRoute,
   PoliciesPolicyIdRoute: PoliciesPolicyIdRoute,
+  CasesIndexRoute: CasesIndexRoute,
   PoliciesIndexRoute: PoliciesIndexRoute,
 }
 export const routeTree = rootRouteImport

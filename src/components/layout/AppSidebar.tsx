@@ -9,6 +9,7 @@ import {
   BarChart3,
   Settings,
   Shield,
+  Briefcase,
 } from "lucide-react";
 import {
   Sidebar,
@@ -32,6 +33,7 @@ const mainNav = [
   { title: "Claims", url: "/claims", icon: ClipboardList },
   { title: "Customers", url: "/customers", icon: Users },
   { title: "Tasks & Workflows", url: "/tasks", icon: ListChecks },
+  { title: "Cases", url: "/cases", icon: Briefcase },
 ];
 
 const secondaryNav = [
