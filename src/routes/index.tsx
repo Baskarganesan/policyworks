@@ -10,6 +10,8 @@ import { ActivityTimeline } from "@/features/dashboard/ActivityTimeline";
 import { AIInsightsPanel } from "@/features/dashboard/AIInsightCard";
 import { RenewalsList } from "@/features/dashboard/RenewalsList";
 import { ClaimsAttentionCard } from "@/features/dashboard/ClaimsAttentionCard";
+import { ExceptionsList } from "@/features/exceptions/EscalationPanel";
+import { getCriticalExceptions } from "@/features/exceptions/mockData";
 import {
   mockActivity,
   mockAlerts,
@@ -88,6 +90,18 @@ function DashboardPage() {
             }
           >
             <AlertsPanel alerts={mockAlerts} />
+          </DashboardSection>
+
+          <DashboardSection
+            title="Exceptions & escalations"
+            description="Active recovery workflows: SLA breaches, conflicts, dependencies, and approvals."
+            actions={
+              <Button size="sm" variant="ghost" className="h-7 px-2 text-xs">
+                {getCriticalExceptions().length} active
+              </Button>
+            }
+          >
+            <ExceptionsList exceptions={getCriticalExceptions().slice(0, 4)} />
           </DashboardSection>
 
           <DashboardSection
