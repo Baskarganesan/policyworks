@@ -12,6 +12,8 @@ import { EvidencePanel } from "@/features/cases/EvidencePanel";
 import { CommunicationFeed } from "@/features/cases/CommunicationFeed";
 import { AuditTimeline } from "@/features/explainability/AuditTimeline";
 import { getAuditEventsFor } from "@/features/explainability/mockData";
+import { ExceptionsList } from "@/features/exceptions/EscalationPanel";
+import { getExceptionsByEntity } from "@/features/exceptions/mockData";
 import { getCaseById } from "@/features/cases/mockData";
 import type { CaseRecord } from "@/features/cases/types";
 
@@ -54,7 +56,13 @@ export const Route = createFileRoute("/cases/$caseId")({
 function CaseDetailPage() {
   const { record } = Route.useLoaderData();
 
+  const exceptions = [
+    ...getExceptionsByEntity("case", record.id),
+    ...record.relatedClaims.flatMap((c) => getExceptionsByEntity("claim", c.id)),
+  ].filter((ex, idx, arr) => arr.findIndex((x) => x.id === ex.id) === idx);
+
   const navItems = [
+    { id: "exceptions", label: "Exceptions & escalations", count: exceptions.length },
     { id: "insights", label: "Risks & insights", count: record.insights.length },
     { id: "tasks", label: "Tasks & blockers", count: record.tasks.filter((t: CaseRecord["tasks"][number]) => t.status !== "done").length },
     { id: "timeline", label: "Timeline", count: record.timeline.length },
@@ -65,6 +73,14 @@ function CaseDetailPage() {
 
   const main = (
     <>
+      <CaseWorkspaceSection
+        id="exceptions"
+        title="Exceptions & escalations"
+        description="Active recovery workflows: SLA breaches, conflicts, blockers, and approval bottlenecks."
+      >
+        <ExceptionsList exceptions={exceptions} />
+      </CaseWorkspaceSection>
+
       <CaseWorkspaceSection
         id="insights"
         title="Risks & AI insights"
