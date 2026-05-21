@@ -58,7 +58,7 @@ function CaseDetailPage() {
 
   const exceptions = [
     ...getExceptionsByEntity("case", record.id),
-    ...record.relatedClaims.flatMap((c) => getExceptionsByEntity("claim", c.id)),
+    ...record.relatedClaims.flatMap((c: CaseRecord["relatedClaims"][number]) => getExceptionsByEntity("claim", c.id)),
   ].filter((ex, idx, arr) => arr.findIndex((x) => x.id === ex.id) === idx);
 
   const navItems = [
