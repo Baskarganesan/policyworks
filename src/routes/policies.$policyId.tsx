@@ -14,6 +14,7 @@ import { PolicySection } from "@/features/policies/PolicySection";
 import { OperationalInsightsPanel } from "@/features/insights/OperationalInsightsPanel";
 import { AuditTimeline } from "@/features/explainability/AuditTimeline";
 import { getAuditEventsFor } from "@/features/explainability/mockData";
+import { DecisionSupportPanel } from "@/features/decision-support/DecisionSupportPanel";
 import { getPolicyById } from "@/features/policies/mockData";
 import { getInsightsForPolicy } from "@/features/insights/mockData";
 import type { CoverageItem, Policy, PolicyInsight, RiskFlag } from "@/features/policies/types";
@@ -56,6 +57,7 @@ function PolicyDetailPage() {
   const navItems = [
     { id: "summary", label: "Summary" },
     { id: "operational", label: "Operational signals" },
+    { id: "decision-support", label: "Decision support" },
     { id: "coverage", label: "Coverage", count: policy.coverage.length },
     { id: "claims", label: "Claims", count: policy.claims.length },
     { id: "documents", label: "Documents", count: policy.documents.length },
@@ -95,6 +97,14 @@ function PolicyDetailPage() {
                 title="Operational insights"
                 description="Cross-entity intelligence drawn from claims, coverage, and renewal signals."
               />
+            </PolicySection>
+
+            <PolicySection
+              id="decision-support"
+              title="Decision support"
+              description="Scenario comparison for renewal and underwriting paths."
+            >
+              <DecisionSupportPanel context="policy" entityId={policy.id} />
             </PolicySection>
 
             <PolicySection
