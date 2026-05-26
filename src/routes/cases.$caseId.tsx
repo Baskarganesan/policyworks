@@ -76,6 +76,14 @@ function CaseDetailPage() {
   const main = (
     <>
       <CaseWorkspaceSection
+        id="decision-support"
+        title="Decision support"
+        description="Compare operational paths, tradeoffs, and projected outcomes for this case."
+      >
+        <DecisionSupportPanel context="case" entityId={record.id} />
+      </CaseWorkspaceSection>
+
+      <CaseWorkspaceSection
         id="exceptions"
         title="Exceptions & escalations"
         description="Active recovery workflows: SLA breaches, conflicts, blockers, and approval bottlenecks."
