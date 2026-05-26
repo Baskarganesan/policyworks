@@ -9,6 +9,7 @@ import { ConflictResolutionCard } from "./ConflictResolutionCard";
 import { ApprovalWorkflowPanel } from "./ApprovalWorkflowPanel";
 import { EscalationTimeline } from "./EscalationTimeline";
 import { ResolutionActionMenu } from "./ResolutionActionMenu";
+import { DecisionSupportPanel } from "@/features/decision-support/DecisionSupportPanel";
 import type { ExceptionType, OperationalException } from "./types";
 
 const TYPE_LABEL: Record<ExceptionType, string> = {
@@ -172,6 +173,17 @@ export function EscalationPanel({ exception, defaultOpen = false, compact = fals
               Escalation timeline
             </h4>
             <EscalationTimeline events={exception.timeline} />
+          </section>
+
+          <section className="space-y-1.5">
+            <h4 className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+              Decision support
+            </h4>
+            <DecisionSupportPanel
+              context="escalation"
+              entityId={exception.id}
+              defaultExpanded={false}
+            />
           </section>
 
           {exception.relatedEntities.length > 0 && (

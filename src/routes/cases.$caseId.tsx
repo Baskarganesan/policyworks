@@ -14,6 +14,7 @@ import { AuditTimeline } from "@/features/explainability/AuditTimeline";
 import { getAuditEventsFor } from "@/features/explainability/mockData";
 import { ExceptionsList } from "@/features/exceptions/EscalationPanel";
 import { getExceptionsByEntity } from "@/features/exceptions/mockData";
+import { DecisionSupportPanel } from "@/features/decision-support/DecisionSupportPanel";
 import { getCaseById } from "@/features/cases/mockData";
 import type { CaseRecord } from "@/features/cases/types";
 
@@ -62,6 +63,7 @@ function CaseDetailPage() {
   ].filter((ex, idx, arr) => arr.findIndex((x) => x.id === ex.id) === idx);
 
   const navItems = [
+    { id: "decision-support", label: "Decision support" },
     { id: "exceptions", label: "Exceptions & escalations", count: exceptions.length },
     { id: "insights", label: "Risks & insights", count: record.insights.length },
     { id: "tasks", label: "Tasks & blockers", count: record.tasks.filter((t: CaseRecord["tasks"][number]) => t.status !== "done").length },
@@ -73,6 +75,14 @@ function CaseDetailPage() {
 
   const main = (
     <>
+      <CaseWorkspaceSection
+        id="decision-support"
+        title="Decision support"
+        description="Compare operational paths, tradeoffs, and projected outcomes for this case."
+      >
+        <DecisionSupportPanel context="case" entityId={record.id} />
+      </CaseWorkspaceSection>
+
       <CaseWorkspaceSection
         id="exceptions"
         title="Exceptions & escalations"

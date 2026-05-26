@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { OperationalInsightsPanel } from "@/features/insights/OperationalInsightsPanel";
 import { getInsightsForClaim } from "@/features/insights/mockData";
+import { DecisionSupportPanel } from "@/features/decision-support/DecisionSupportPanel";
 import { ClaimStatusBadge } from "./ClaimStatusBadge";
 import { PriorityBadge } from "./PriorityBadge";
 import { ClaimSummaryCard } from "./ClaimSummaryCard";
@@ -104,6 +105,9 @@ export function ClaimDetailDrawer({
           <ScrollArea className="flex-1">
             <TabsContent value="overview" className="m-0 space-y-6 p-6">
               <OperationalInsightsPanel insights={getInsightsForClaim(claim.id)} compact />
+
+              <DecisionSupportPanel context="claim" entityId={claim.id} defaultExpanded={false} />
+
 
               <section className="grid grid-cols-2 gap-3">
                 <ClaimSummaryCard label="Amount" value={formatAmount(claim.amount)} />
