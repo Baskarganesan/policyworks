@@ -15,6 +15,7 @@ import { getAuditEventsFor } from "@/features/explainability/mockData";
 import { ExceptionsList } from "@/features/exceptions/EscalationPanel";
 import { getExceptionsByEntity } from "@/features/exceptions/mockData";
 import { DecisionSupportPanel } from "@/features/decision-support/DecisionSupportPanel";
+import { InstitutionalMemoryPanel } from "@/features/knowledge/InstitutionalMemoryPanel";
 import { getCaseById } from "@/features/cases/mockData";
 import type { CaseRecord } from "@/features/cases/types";
 
@@ -64,6 +65,7 @@ function CaseDetailPage() {
 
   const navItems = [
     { id: "decision-support", label: "Decision support" },
+    { id: "memory", label: "Institutional memory" },
     { id: "exceptions", label: "Exceptions & escalations", count: exceptions.length },
     { id: "insights", label: "Risks & insights", count: record.insights.length },
     { id: "tasks", label: "Tasks & blockers", count: record.tasks.filter((t: CaseRecord["tasks"][number]) => t.status !== "done").length },
@@ -81,6 +83,14 @@ function CaseDetailPage() {
         description="Compare operational paths, tradeoffs, and projected outcomes for this case."
       >
         <DecisionSupportPanel context="case" entityId={record.id} />
+      </CaseWorkspaceSection>
+
+      <CaseWorkspaceSection
+        id="memory"
+        title="Institutional memory"
+        description="Similar cases, lessons learned, playbooks, and expert notes from prior resolutions."
+      >
+        <InstitutionalMemoryPanel context="case" entityId={record.id} />
       </CaseWorkspaceSection>
 
       <CaseWorkspaceSection

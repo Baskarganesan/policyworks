@@ -15,6 +15,7 @@ import { OperationalInsightsPanel } from "@/features/insights/OperationalInsight
 import { AuditTimeline } from "@/features/explainability/AuditTimeline";
 import { getAuditEventsFor } from "@/features/explainability/mockData";
 import { DecisionSupportPanel } from "@/features/decision-support/DecisionSupportPanel";
+import { InstitutionalMemoryPanel } from "@/features/knowledge/InstitutionalMemoryPanel";
 import { getPolicyById } from "@/features/policies/mockData";
 import { getInsightsForPolicy } from "@/features/insights/mockData";
 import type { CoverageItem, Policy, PolicyInsight, RiskFlag } from "@/features/policies/types";
@@ -58,6 +59,7 @@ function PolicyDetailPage() {
     { id: "summary", label: "Summary" },
     { id: "operational", label: "Operational signals" },
     { id: "decision-support", label: "Decision support" },
+    { id: "memory", label: "Institutional memory" },
     { id: "coverage", label: "Coverage", count: policy.coverage.length },
     { id: "claims", label: "Claims", count: policy.claims.length },
     { id: "documents", label: "Documents", count: policy.documents.length },
@@ -105,6 +107,14 @@ function PolicyDetailPage() {
               description="Scenario comparison for renewal and underwriting paths."
             >
               <DecisionSupportPanel context="policy" entityId={policy.id} />
+            </PolicySection>
+
+            <PolicySection
+              id="memory"
+              title="Institutional memory"
+              description="Historical patterns from policies with comparable risk profile."
+            >
+              <InstitutionalMemoryPanel context="policy" entityId={policy.id} defaultExpanded={false} />
             </PolicySection>
 
             <PolicySection

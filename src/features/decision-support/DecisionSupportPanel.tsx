@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ScenarioComparisonCard } from "./ScenarioComparisonCard";
 import { OperationalDecisionMatrix } from "./OperationalDecisionMatrix";
 import { GlobalHumanReviewNotice } from "./HumanReviewBanner";
+import { InstitutionalMemoryPanel } from "@/features/knowledge/InstitutionalMemoryPanel";
 import { getDecisionSupport } from "./mockData";
 import type { DecisionContext } from "./types";
 
@@ -79,6 +80,19 @@ export function DecisionSupportPanel({
               criteria={bundle.matrixCriteria}
             />
           )}
+          <InstitutionalMemoryPanel
+            context="decision"
+            entityId={entityId}
+            title="Historical precedent"
+            description="Outcomes, rationale, and expert notes from analogous prior decisions."
+            defaultExpanded={false}
+          />
+        </>
+      )}
+    </section>
+  );
+}
+
         </>
       )}
     </section>
