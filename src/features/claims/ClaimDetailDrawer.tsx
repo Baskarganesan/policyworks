@@ -14,6 +14,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { OperationalInsightsPanel } from "@/features/insights/OperationalInsightsPanel";
 import { getInsightsForClaim } from "@/features/insights/mockData";
 import { DecisionSupportPanel } from "@/features/decision-support/DecisionSupportPanel";
+import { InstitutionalMemoryPanel } from "@/features/knowledge/InstitutionalMemoryPanel";
 import { ClaimStatusBadge } from "./ClaimStatusBadge";
 import { PriorityBadge } from "./PriorityBadge";
 import { ClaimSummaryCard } from "./ClaimSummaryCard";
@@ -107,6 +108,10 @@ export function ClaimDetailDrawer({
               <OperationalInsightsPanel insights={getInsightsForClaim(claim.id)} compact />
 
               <DecisionSupportPanel context="claim" entityId={claim.id} defaultExpanded={false} />
+
+              <InstitutionalMemoryPanel context="claim" entityId={claim.id} defaultExpanded={false} />
+
+
 
 
               <section className="grid grid-cols-2 gap-3">

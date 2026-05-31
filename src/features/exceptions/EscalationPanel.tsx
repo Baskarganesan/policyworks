@@ -10,6 +10,7 @@ import { ApprovalWorkflowPanel } from "./ApprovalWorkflowPanel";
 import { EscalationTimeline } from "./EscalationTimeline";
 import { ResolutionActionMenu } from "./ResolutionActionMenu";
 import { DecisionSupportPanel } from "@/features/decision-support/DecisionSupportPanel";
+import { InstitutionalMemoryPanel } from "@/features/knowledge/InstitutionalMemoryPanel";
 import type { ExceptionType, OperationalException } from "./types";
 
 const TYPE_LABEL: Record<ExceptionType, string> = {
@@ -180,6 +181,17 @@ export function EscalationPanel({ exception, defaultOpen = false, compact = fals
               Decision support
             </h4>
             <DecisionSupportPanel
+              context="escalation"
+              entityId={exception.id}
+              defaultExpanded={false}
+            />
+          </section>
+
+          <section className="space-y-1.5">
+            <h4 className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+              Institutional memory
+            </h4>
+            <InstitutionalMemoryPanel
               context="escalation"
               entityId={exception.id}
               defaultExpanded={false}
