@@ -92,9 +92,3 @@ export function DecisionSupportPanel({
     </section>
   );
 }
-
-        </>
-      )}
-    </section>
-  );
-}
